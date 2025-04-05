@@ -1,33 +1,80 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>LTU CompSci - Coming Soon</title>
+<title>Leeds Trinity CompSci - Live Event & Resources</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <style>
-body,h1 {font-family: "Raleway", sans-serif}
+body,h1,p,a {font-family: "Raleway", sans-serif; color: white;} /* Set default text color to white */
 body, html {height: 100%}
 .bgimg {
   background-image: url('/images/comingSoon/forestbridge.jpg');
   min-height: 100%;
   background-position: center;
   background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.logo-topleft {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+.logo {
+  width: auto; /* Adjust as needed */
+  max-width: 200px; /* Set a maximum width */
+  height: auto;
+}
+.content-middle {
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5); /* Keep the semi-transparent background for better readability */
+  border-radius: 10px;
+}
+.event-title {
+  font-size: 3em;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+.repo-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f44336; /* Keep the button color */
+  color: white; /* Ensure the button text is also white */
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+.repo-link:hover {
+  background-color: #d32f2f;
+}
+.dept-info {
+  font-size: 1.2em;
+  margin-top: 20px;
+}
+.separator {
+  border: 1px solid #ccc;
+  width: 60%;
+  margin: 20px auto;
 }
 </style>
 </head>
 <body>
 
-<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
-  <div class="w3-display-topleft w3-padding-large w3-xlarge">
-    <img src="/images/Logo/LeedsTrinityUniversityLogo2.png" width=20%>
+<div class="bgimg">
+  <div class="logo-topleft">
+    <img src="/images/Logo/LeedsTrinityUniversityLogo2.png" alt="Leeds Trinity University Logo" class="logo">
   </div>
-  <div class="w3-display-middle">
-    <h1 class="w3-jumbo w3-animate-top">Event Live bit.ly/4igddvf </h1>
-    <a href="https://bit.ly/4igddvf">Access the GitHub Repo</a>
-    <hr class="w3-border-grey" style="margin:auto;width:40%">
-    <p class="w3-large w3-center">School of Computer Sciecne at Leeds Trinity University</p>
+  <div class="content-middle">
+    <h1 class="event-title w3-animate-top">Join Our Live Event!</h1>
+    <p class="w3-large">Learn more and participate:</p>
+    <a href="https://bit.ly/csltugithub" class="repo-link w3-button">Access the Live Event / GitHub Repo</a>
+    <hr class="separator">
+    <p class="dept-info">School of Computer Science at Leeds Trinity University</p>
   </div>
 </div>
 
