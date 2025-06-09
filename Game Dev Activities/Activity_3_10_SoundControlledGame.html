@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sound Controlled Game</title>
+  <style>
+    body { text-align: center; font-family: sans-serif; }
+    canvas { border: 1px solid black; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h2>🎤 Sound Controlled Game</h2>
+  <p>Make a loud sound to lift the ball! (Allow mic access)</p>
+  <canvas id="gameCanvas" width="400" height="300"></canvas>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    let y = canvas.height / 2;
+    let velocity = 0;
+
+    function drawBall() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.beginPath();
+      ctx.arc(200, y, 15, 0, Math.PI * 2);
+      ctx.fillStyle = "blue";
+      ctx.fill();
+    }
+
+    function update() {
+      velocity += 1; // gravity
+      y += velocity;
+      if (y > canvas.height - 15) {
+        y = canvas.height - 15;
+        velocity = 0;
+      }
+      if (y < 15) {
+        y = 15;
+        velocity = 0;
+      }
+      drawBall();
+    }
+
+    setInterval(update, 50);
+
+    // Microphone logic
+    navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(function(stream) {
+        const context = new AudioContext();
+        const source = context.createMediaStreamSource(stream);
+        const analyser = context.createAnalyser();
+        source.connect(analyser);
+        const data = new Uint8Array(analyser.frequencyBinCount);
+
+        function listen() {
+          analyser.getByteFrequencyData(data);
+          let volume = data.reduce((a, b) => a + b, 0) / data.length;
+          if (volume > 50) {
+            velocity = -10; // lift
+          }
+          setTimeout(listen, 100);
+        }
+
+        listen();
+      })
+      .catch(function(err) {
+        alert("Microphone access denied or not supported.");
+      });
+  </script>
+</body>
+</html>
