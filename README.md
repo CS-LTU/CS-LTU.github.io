@@ -1,2 +1,4 @@
 # AI_Session_LTU_Compsci
-You will find the activity files for the AI session here. 
+Welcome to the Computer Science Repository. 
+
+We host events and taster sessions via the repo here. if you have enjoyed the activity, keep track of the changes and we hope you enjoy the workshops. 
