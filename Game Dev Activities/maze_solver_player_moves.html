@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Maze Player Challenge</title>
+  <style>
+    canvas { background: #eee; display: block; margin: auto; }
+    body { text-align: center; font-family: Arial, sans-serif; }
+  </style>
+</head>
+<body>
+  <h2>🧭 Maze Player Challenge</h2>
+  <p>Use the arrow keys to move through the maze. Reach the bottom-right corner!</p>
+  <canvas id="mazeCanvas" width="800" height="800"></canvas>
+  <script>
+    const canvas = document.getElementById("mazeCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const mazeSize = 20;
+    const tileSize = 40;
+
+    // Generate a basic static 20x20 maze (1 = wall, 0 = path)
+    const maze = Array.from({ length: mazeSize }, (_, row) =>
+      Array.from({ length: mazeSize }, (_, col) => {
+        if (row % 2 === 1 && col % 2 === 1) return 0;
+        return Math.random() > 0.75 ? 1 : 0;
+      })
+    );
+    maze[0][0] = 0;
+    maze[mazeSize - 1][mazeSize - 1] = 0;
+
+    let player = { x: 0, y: 0 };
+
+    function drawMaze() {
+      for (let row = 0; row < mazeSize; row++) {
+        for (let col = 0; col < mazeSize; col++) {
+          ctx.fillStyle = maze[row][col] === 1 ? "black" : "white";
+          ctx.fillRect(col * tileSize, row * tileSize, tileSize, tileSize);
+        }
+      }
+
+      // Draw player
+      ctx.beginPath();
+      ctx.arc(player.y * tileSize + tileSize/2, player.x * tileSize + tileSize/2, tileSize/3, 0, 2 * Math.PI);
+      ctx.fillStyle = "red";
+      ctx.fill();
+
+      // Draw goal
+      ctx.fillStyle = "green";
+      ctx.fillRect((mazeSize - 1) * tileSize, (mazeSize - 1) * tileSize, tileSize, tileSize);
+    }
+
+    function movePlayer(dx, dy) {
+      const newX = player.x + dx;
+      const newY = player.y + dy;
+
+      if (newX >= 0 && newY >= 0 && newX < mazeSize && newY < mazeSize && maze[newX][newY] === 0) {
+        player.x = newX;
+        player.y = newY;
+        drawMaze();
+
+        if (player.x === mazeSize - 1 && player.y === mazeSize - 1) {
+          setTimeout(() => alert("🎉 You solved the maze!"), 10);
+        }
+      }
+    }
+
+    document.addEventListener("keydown", (e) => {
+      switch (e.key) {
+        case "ArrowUp": movePlayer(-1, 0); break;
+        case "ArrowDown": movePlayer(1, 0); break;
+        case "ArrowLeft": movePlayer(0, -1); break;
+        case "ArrowRight": movePlayer(0, 1); break;
+      }
+    });
+
+    drawMaze();
+  </script>
+</body>
+</html>

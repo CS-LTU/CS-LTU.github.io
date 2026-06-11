@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🔓 Level Unlocker Game</title>
+  <style>
+    body { text-align: center; font-family: Arial; background-color: #f0f0f0; }
+    .level { margin: 20px auto; padding: 20px; border: 2px solid #333; width: 300px; background: white; }
+    button { padding: 10px 20px; margin-top: 10px; font-size: 16px; }
+    .locked { background-color: #ccc; color: #666; cursor: not-allowed; }
+    .unlocked { background-color: #4CAF50; color: white; }
+  </style>
+</head>
+<body>
+  <h1>🎮 Level Unlocker</h1>
+  <p>Complete each level to unlock the next one!</p>
+
+  <div id="level1" class="level">
+    <h2>Level 1</h2>
+    <p>Click the button to unlock Level 2</p>
+    <button onclick="unlockLevel(2)">Complete Level 1</button>
+  </div>
+
+  <div id="level2" class="level locked">
+    <h2>Level 2</h2>
+    <p>Click the button to unlock Level 3</p>
+    <button id="btn2" onclick="unlockLevel(3)" disabled>Complete Level 2</button>
+  </div>
+
+  <div id="level3" class="level locked">
+    <h2>Level 3</h2>
+    <p>This is the final level. Click to finish!</p>
+    <button id="btn3" onclick="finishGame()" disabled>Finish Game</button>
+  </div>
+
+  <h2 id="result"></h2>
+
+  <script>
+    function unlockLevel(level) {
+      if (level === 2) {
+        document.getElementById('level2').classList.remove('locked');
+        document.getElementById('level2').classList.add('unlocked');
+        document.getElementById('btn2').disabled = false;
+      } else if (level === 3) {
+        document.getElementById('level3').classList.remove('locked');
+        document.getElementById('level3').classList.add('unlocked');
+        document.getElementById('btn3').disabled = false;
+      }
+    }
+
+    function finishGame() {
+      document.getElementById('result').textContent = '🎉 Congratulations! You completed all levels!';
+    }
+  </script>
+</body>
+</html>

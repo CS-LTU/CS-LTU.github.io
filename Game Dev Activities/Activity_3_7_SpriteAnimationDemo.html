@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { text-align: center; font-family: Arial; }
+    canvas { border: 1px solid black; }
+  </style>
+</head>
+<body>
+  <h2>Sprite Animation Demo</h2>
+  <canvas id="gameCanvas" width="256" height="256"></canvas>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    const sprite = new Image();
+    sprite.src = "https://opengameart.org/sites/default/files/Green-Cap-Character-16x18.png";
+
+    let frameIndex = 0;
+    const frameWidth = 16;
+    const frameHeight = 18;
+    const totalFrames = 6;
+
+    function drawFrame() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(sprite, frameIndex * frameWidth, 0, frameWidth, frameHeight, 120, 120, 32, 36);
+      frameIndex = (frameIndex + 1) % totalFrames;
+    }
+
+    sprite.onload = function() {
+      setInterval(drawFrame, 150);
+    };
+  </script>
+</body>
+</html>
